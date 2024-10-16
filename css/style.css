@@ -2617,28 +2617,6 @@ figure.highlight .shrink-line:hover::before {
   transform: scale(0.78);
   transform-origin: left;
 }
-.header-wrapper .header-content .left .logo-image {
-  flex-shrink: 0;
-  width: 2.68rem;
-  height: 2.68rem;
-  margin-right: 0.5rem;
-}
-@media (max-width: 800px) {
-  .header-wrapper .header-content .left .logo-image {
-    width: 2.412rem;
-    height: 2.412rem;
-  }
-}
-@media (max-width: 500px) {
-  .header-wrapper .header-content .left .logo-image {
-    width: 2.144rem;
-    height: 2.144rem;
-  }
-}
-.header-wrapper .header-content .left .logo-image img {
-  width: 100%;
-  border-radius: 0.4rem;
-}
 .header-wrapper .header-content .left .site-name {
   color: var(--text-color-1);
   font-weight: 600;

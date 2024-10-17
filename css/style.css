@@ -1,6 +1,6 @@
 :root {
-  --base-font-size: 18px;
-  --base-line-height: 22px;
+  --base-font-size: 20px;
+  --base-line-height: 26px;
   --base-font-weight: 400;
   --base-font-family: Optima-Regular, Optima, PingFang SC, Microsoft YaHei, sans-serif;
   --page-content-width: 80%;
@@ -10,12 +10,12 @@
   --page-content-max-width-2: calc(var(--page-content-max-width) * 1.2);
   --component-gap: 36px;
   --box-border-radius: 8px;
-  --header-height: 70px;
+  --header-height: 50px;
   --header-shrink-height: calc(var(--header-height) * 0.72);
   --header-backdrop-filter-blur: 4px;
-  --header-scroll-progress-bar-height: 2px;
+  --header-scroll-progress-bar-height: 1px;
   --header-title-font-family: var(--base-font-family);
-  --header-title-font-size: 1.8rem;
+  --header-title-font-size: 1rem;
   --header-menu-icon: inline-flex;
   --first-screen-display: block;
   --first-screen-font-family: var(--base-font-family);

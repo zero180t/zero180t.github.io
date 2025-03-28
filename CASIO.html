@@ -172,8 +172,7 @@
         #button2 {
             background-color: rgb(110, 213, 192);
         }
-        
-        .image {
+        /* .image {
             position: absolute;
             top: 90px;
             right: 100px;
@@ -183,8 +182,8 @@
         
         .image:hover {
             /* 鼠标悬停放大 */
-            transform: scale(2);
-        }
+        /* transform: scale(2); */
+        /* } */
     </style>
 </head>
 
@@ -324,9 +323,9 @@
     <script>
         const display2 = document.getElementById("display2");
         const display1 = document.getElementById("display1");
-        const image = document.getElementById("img");
+        // const image = document.getElementById("img");
         const body = document.body;
-        var img_visibility = "hidden";
+        // var img_visibility = "hidden";
 
         function appendTodisplay2(value) {
             switch (value) {
@@ -383,15 +382,15 @@
                 case "?":
                     alert('作者：zero180t@qq.com\n关于计算器结果过长查看不全问题，\n请点击计算器屏幕，然后移动键盘左键右键即可');
                     break;
-                case "img":
-                    if (img_visibility === "hidden") {
-                        image.style.visibility = "visible";
-                        img_visibility = "visible";
-                    } else {
-                        image.style.visibility = img_visibility;
-                        img_visibility = "hidden";
-                    }
-                    break;
+                    // case "img":
+                    //     if (img_visibility === "hidden") {
+                    //         image.style.visibility = "visible";
+                    //         img_visibility = "visible";
+                    //     } else {
+                    //         image.style.visibility = img_visibility;
+                    //         img_visibility = "hidden";
+                    //     }
+                    //     break;
                 case "=":
                     if (display1.value === "OFF") {
                         display1.value = "OFF";

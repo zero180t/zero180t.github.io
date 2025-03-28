@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>简单计算器GASIO版</title>
+    <style>
+        body {
+            /* background-color: rgb(173, 220, 142); */
+            background-color: rgb(74, 126, 247);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            position: relative;
+        }
+        
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: inherit;
+            background-size: inherit;
+            background-repeat: inherit;
+            background-position: inherit;
+            filter: blur(5px);
+            /* 设置模糊半径，数值越大越模糊 */
+            z-index: -1;
+            /* 将伪元素置于页面内容下方 */
+        }
+        
+        .box {
+            margin: auto;
+            width: 360px;
+            height: auto;
+            background-color: rgb(110, 213, 192);
+            border-top: 5px solid rgb(231, 231, 231);
+            border-left: 5px solid rgb(255, 255, 255);
+            border-right: 5px solid grey;
+            border-bottom: 5px solid grey;
+            border-radius: 35px;
+        }
+        
+        #table1 {
+            width: 80px;
+        }
+        
+        #table2 {
+            width: 290px;
+        }
+        
+        #table3 {
+            width: 110px;
+        }
+        
+        #table4 {
+            width: 10px;
+        }
+        
+        .sun {
+            width: 99%;
+            height: 35px;
+            margin-top: 8px;
+            background-color: rgb(77, 47, 35);
+            border-radius: 8px;
+            border: 2px solid rgb(57, 179, 157);
+        }
+        
+        #brandname {
+            font-size: 20px;
+            font-weight: bold;
+            color: rgb(46, 36, 40);
+            margin: 8px 20px 0 20px;
+        }
+        
+        #version1 {
+            font-size: 12px;
+            margin-top: 8px;
+            margin-bottom: auto;
+            padding: 0;
+            text-align: right;
+        }
+        
+        #version2 {
+            font-weight: bold;
+            font-size: 20px;
+            margin-top: 8px;
+            margin-right: 12px;
+            margin-bottom: auto;
+            text-align: right;
+        }
+        
+        .screen {
+            width: 90%;
+            height: 100px;
+            background-color: rgb(207, 227, 228);
+            border-top: 8px solid rgb(6, 145, 124);
+            border-left: 8px solid rgb(67, 187, 163);
+            border-right: 8px solid rgb(119, 223, 202);
+            border-bottom: 8px solid rgb(112, 218, 196);
+            border-radius: 10px;
+            margin: 10px auto;
+        }
+        
+        .display2 {
+            height: 39%;
+            width: 98%;
+            margin: 0;
+            padding: 0;
+            background-color: rgb(207, 227, 228);
+            border: 0px;
+            font-size: 20px;
+            text-align: right;
+        }
+        
+        .display1 {
+            height: 59%;
+            width: 98%;
+            margin: 0;
+            padding: 0;
+            background-color: rgb(207, 227, 228);
+            border: 0px;
+            font-size: 35px;
+            text-align: right;
+        }
+        
+        .panel {
+            width: 90%;
+            height: auto;
+            border-bottom: 1px solid rgb(6, 145, 124);
+            border-right: 1px solid rgb(67, 187, 163);
+            border-left: 1px solid rgb(119, 223, 202);
+            border-top: 1px solid rgb(112, 218, 196);
+            padding: 8px;
+            border-radius: 10px;
+            margin: 10px auto;
+        }
+        
+        .panel_table {
+            width: 99%;
+            /* border: 1px solid rgb(0, 0, 0); */
+        }
+        
+        .button_n {
+            /* border: 1px solid rgb(0, 0, 0); */
+            width: 24%;
+            height: 40px;
+        }
+        
+        .button_n input[type="button"] {
+            width: 98%;
+            height: 98%;
+            font-size: 20px;
+            border-radius: 10px;
+            margin: 3px;
+        }
+        
+        #button0 {
+            height: 80%;
+            background-color: rgb(172, 219, 141);
+        }
+        
+        #button1 {
+            background-color: rgb(110, 213, 192);
+        }
+        
+        #button2 {
+            background-color: rgb(110, 213, 192);
+        }
+        
+        .image {
+            position: absolute;
+            top: 90px;
+            right: 100px;
+            width: 200px;
+            height: auto;
+        }
+        
+        .image:hover {
+            /* 鼠标悬停放大 */
+            transform: scale(2);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="box">
+        <div class="head">
+            <table>
+                <tr>
+                    <td id="table1">
+                        <p id="brandname">GASIO</p>
+                    </td>
+                    <td id="table2">
+                        <div class="sun"></div>
+                    </td>
+                    <td id="table3">
+                        <p id="version1">MX-12B</p>
+                    </td>
+                    <td id="table4">
+                        <p id="version2">12</p>
+                    </td>
+                    <span class="brand"></span>
+            </table>
+        </div>
+        <div class="screen">
+            <input type="text" class="display2" id="display2" value="" disabled>
+            <input type="text" class="display1" id="display1" value="ON" disabled>
+        </div>
+        <div class="panel">
+            <table class="panel_table">
+                <tr>
+                    <td class="button_n"> </td>
+                    <td class="button_n">
+                        <input type="button" id="button0" value="🎲" onclick="appendTodisplay2('back')">
+                    </td>
+                    <td class="button_n">
+                        <input type="button" id="button0" value="👁" onclick="clearDisplay2('img')">
+                    </td>
+                    <td class="button_n">
+                        <input type="button" id="button0" value="ON" onclick="appendTodisplay2('ON')">
+                    </td>
+                    <td class="button_n">
+                        <input type="button" id="button0" value="OFF" onclick="appendTodisplay2('OFF')">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="button_n">
+                        <input type="button" id="button1" value="←" onclick="appendTodisplay2('←')">
+                    </td>
+                    <td class="button_n">
+                        <input type="button" id="button1" value="→" onclick="appendTodisplay2('→')">
+                    </td>
+                    <td class="button_n">
+                        <input type="button" id="button1" value="AC" onclick="appendTodisplay2('AC')">
+                    </td>
+                    <td class="button_n">
+                        <input type="button" id="button1" value="DEL" onclick="appendTodisplay2('DEL')">
+                    </td>
+
+                    <td class="button_n">
+                        <input type="button" id="button1" value="÷" onclick="appendTodisplay2('÷')">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="button_n">
+                        <input type="button" id="button1" value="π" onclick="appendTodisplay2('π')">
+                    </td>
+                    <td class="button_n">
+                        <input type="button" value="7" onclick="appendTodisplay2('7')">
+                    </td>
+                    <td class="button_n">
+                        <input type="button" value="8" onclick="appendTodisplay2('8')">
+                    </td>
+                    <td class="button_n">
+                        <input type="button" value="9" onclick="appendTodisplay2('9')">
+                    </td>
+                    <td class="button_n">
+                        <input type="button" id="button1" value="×" onclick="appendTodisplay2('×')">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="button_n">
+                        <input type="button" id="button1" value="✉" onclick="appendTodisplay2('outlook')">
+                    </td>
+                    <td class="button_n">
+                        <input type="button" value="4" onclick="appendTodisplay2('4')">
+                    </td>
+                    <td class="button_n">
+                        <input type="button" value="5" onclick="appendTodisplay2('5')">
+                    </td>
+                    <td class="button_n">
+                        <input type="button" value="6" onclick="appendTodisplay2('6')">
+                    </td>
+                    <td class="button_n">
+                        <input type="button" id="button1" value="-" onclick="appendTodisplay2('-')">
+                    </td>
+                    <td class="button_n">
+                </tr>
+                <tr>
+                    <td class="button_n">
+                        <input type="button" id="button1" value="ⓘ" onclick="appendTodisplay2('i')">
+                    </td>
+                    <td class="button_n">
+                        <input type="button" value="1" onclick="appendTodisplay2('1')">
+                    </td>
+                    <td class="button_n">
+                        <input type="button" value="2" onclick="appendTodisplay2('2')">
+                    </td>
+                    <td class="button_n">
+                        <input type="button" value="3" onclick="appendTodisplay2('3')">
+                    </td>
+                    <td class="button_n" rowspan="2">
+                        <input type="button" id="button1" value="+" onclick="appendTodisplay2('+')">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="button_n">
+                        <input type="button" value="?" onclick="appendTodisplay2('?')">
+                    </td>
+                    <td class="button_n">
+                        <input type="button" value="0" onclick="appendTodisplay2('0')">
+                    </td>
+                    <td class="button_n">
+                        <input type="button" value="·" onclick="appendTodisplay2('.')">
+                    </td>
+                    <td class="button_n">
+                        <input type="button" id="button1" value="=" onclick="appendTodisplay2('=')">
+                    </td>
+                    <td class="button_n"> </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <img class="image" src="image.png" id="img" alt="CASIO原版计算器">
+
+
+    <script>
+        const display2 = document.getElementById("display2");
+        const display1 = document.getElementById("display1");
+        const image = document.getElementById("img");
+        const body = document.body;
+        var img_visibility = "hidden";
+
+        function appendTodisplay2(value) {
+            switch (value) {
+                case "back":
+
+                    break;
+                case "ON":
+                    display2.value = "";
+                    display1.value = "ON";
+                    break;
+                case "OFF":
+                    display2.value = "";
+                    display1.value = "OFF";
+                    break;
+                case "←":
+                    display2.value = display2.value.slice(0, -1);
+                    break;
+                case "→":
+                    display2.value = display2.value.slice(1);
+                    break;
+                case "AC":
+                    display2.value = "";
+                    display1.value = "0";
+                    break;
+                case "DEL":
+                    display2.value = display2.value.slice(0, -1);
+                    break;
+                case "÷":
+                    display2.value += "/";
+                    break;
+                case "×":
+                    display2.value += "*";
+                    break;
+                case "π":
+                    display2.value += "3.14";
+                    break;
+                case "+":
+                    display2.value += "+";
+                    break;
+                case "-":
+                    display2.value += "-";
+                    break;
+                case "outlook":
+                    alert('作者信箱：zero180t@qq.com\n请跳转至邮箱客户端发送邮件');
+                    const recipient = 'zero180t@qq.com';
+                    const subject = '关于计算器的问题';
+                    const body = '我在使用计算器时遇到了以下问题：' + display2.value;
+                    const mailtoLink = `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+                    window.location.href = mailtoLink;
+                    break;
+                case "i":
+                    alert('作者：zero180t@qq.com\n制作日期2025/3/28\n版本号V1.0\n功能：基本运算');
+                    break;
+                case "?":
+                    alert('作者：zero180t@qq.com\n关于计算器结果过长查看不全问题，\n请点击计算器屏幕，然后移动键盘左键右键即可');
+                    break;
+                case "img":
+                    if (img_visibility === "hidden") {
+                        image.style.visibility = "visible";
+                        img_visibility = "visible";
+                    } else {
+                        image.style.visibility = img_visibility;
+                        img_visibility = "hidden";
+                    }
+                    break;
+                case "=":
+                    if (display1.value === "OFF") {
+                        display1.value = "OFF";
+                        break;
+                    } else {
+                        try {
+                            display1.value = eval(display2.value);
+                        } catch (error) {
+                            display1.value = "错误";
+                        }
+                    }
+                    break;
+                default:
+                    if (display1.value === "OFF") {
+                        display1.value = "OFF";
+                        break;
+                    } else {
+                        display2.value += value;
+                    }
+                    break;
+            }
+        }
+    </script>
+</body>
+
+</html>
